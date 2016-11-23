@@ -10,7 +10,7 @@
 * BAU assignment logic is broken out into own class which is injected, can be updated easily (could have potentially been its own service) 
 * Requirejs used for front end to make it simpler and more understandable, also library is used for wheel of fortune, only needs to be lightweight currently, so didnt need to bring in any big frameworks
 * API lacks standard design (perhaps RPC-like), though simple at the moment, may require rethought if it became more complicated
-* database is in dal layer just because 
+* database is in dal layer just because it makes life easier, in real deployment this wouldnt be the case
 
 ##improvements/ todo
 
@@ -19,11 +19,12 @@
 * no tests for front end
 * break contracts out into own proj (believe this was mentioned)
 * view.js needs sorting out (vals being broke out into consts/ general refactoring) 
-* frontend is a bit bleak
+* frontend is a bit bleak (continue with images)
 * rename HomeController
 * more tests in general, in particular validation around assign employee
 * minify winwheel
 * reduce html further by creating wheel of fortune component
+* change references of staff number to employee number 
 
 
 ##to run
