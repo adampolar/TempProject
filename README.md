@@ -23,6 +23,7 @@ improvements/ todo
 *rename HomeController
 *more tests in general, in particular validation around assign employee
 *minify winwheel
+*reduce html further by creating wheel of fortune component
 
 
 to run
