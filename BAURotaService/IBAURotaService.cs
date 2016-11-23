@@ -24,4 +24,16 @@ namespace BAURotaService
         [OperationContract]
         bool AssignEmployee(int employeeNumber, bool morning);
     }
+
+    [DataContract]
+    public class AssignmentFault
+    {
+        public AssignmentFault(string message)
+        {
+            Message = message;
+        }
+
+        [DataMember]
+        public string Message { get; private set; }
+    }
 }

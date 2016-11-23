@@ -10,8 +10,6 @@ using EmployeeService;
 
 namespace BAURotaService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class BAURotaService : IBAURotaService
     {
         private IBAUAssignmentRepository _bauAssignmentRepository;
@@ -25,12 +23,18 @@ namespace BAURotaService
 
         public bool AssignEmployee(int employeeNumber, bool morning)
         {
+            if((morning && _bauAssignmentRepository.Get(DateTime.Now.Date, false) != null) || 
+                _bauAssignmentRepository.ListFrom(DateTime.Now.Date).Count() > 0)
+            {
+                throw new FaultException<AssignmentFault>(new AssignmentFault("Cannot assign before another assignement"));
+            }
             return _bauAssignmentRepository.Create(DateTime.Now.Date, morning, employeeNumber);
         }
 
         public List<int> GetEligibleEmployees(bool morning)
         {
-            List<BAUAssignment> bauAssignmentsForPastTwoWeeks = _bauAssignmentRepository.ListFrom(DateTime.Now - new TimeSpan(14, 0 , 0, 0));
+            List<BAUAssignment> bauAssignmentsForAtLeastPastTwoWeeks = 
+                _bauAssignmentRepository.ListFrom(DateTime.Now - new TimeSpan(15, 0 , 0, 0)).Take(20).ToList();
 
             List<int> allEmployees;
 
@@ -39,7 +43,7 @@ namespace BAURotaService
                 allEmployees = employeeService.Service.GetAllEmployees().Select(e => e.StaffNumber).ToList();
             }
 
-            return _bauAssignmentEligibilitySelector.ListEligibleEmployees(DateTime.Now.Date, morning, bauAssignmentsForPastTwoWeeks, allEmployees);
+            return _bauAssignmentEligibilitySelector.ListEligibleEmployees(DateTime.Now.Date, morning, bauAssignmentsForAtLeastPastTwoWeeks, allEmployees);
         }
 
         public List<int?> GetTodaysRota()
