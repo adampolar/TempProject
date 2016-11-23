@@ -1,0 +1,66 @@
+﻿body {
+    font-family: Ultra;
+    color: #333030;
+    background-color:#FEFEF2;
+}
+
+.wheel-of-fortune {
+    margin: 0 auto;
+    width: 600px;
+    text-align:center;
+    font-size:30px;
+}
+
+#header {
+    font-size:80px;
+    text-align:center;
+}
+
+.day-part .title {
+    font-size:50px;
+    text-align:center;
+}
+
+button {
+    width: 100%;
+    font-family: ultra;
+    font-size: 30px;
+    background-color: #333030;
+    color: #FEFEF2;
+    border:none;
+}
+
+#afternoon {
+    //display:none;
+}
+
+#the-unlucky-one-container {
+    display:none;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+
+#the-unlucky-one {
+    width: 100%;
+    text-align: center;
+    font-size:60px;
+    position:absolute;
+    top:35%;
+    height:30%;
+    background: #FEFEF2;
+    z-index:2;
+}
+
+#fill-background {
+    height:100%;
+    width:100%;
+    opacity: 0.5;
+    background-color: #333030;
+    z-index:1;
+}
+
+
+
